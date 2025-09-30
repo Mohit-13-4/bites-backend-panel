@@ -14,7 +14,205 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          category_name: string
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          updated_at: string | null
+        }
+        Insert: {
+          category_name: string
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          updated_at?: string | null
+        }
+        Update: {
+          category_name?: string
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      food_items: {
+        Row: {
+          allergens: string[] | null
+          category_id: string | null
+          created_at: string | null
+          description: string
+          id: string
+          image_url: string
+          ingredients: string[] | null
+          is_available: boolean | null
+          is_popular: boolean | null
+          is_vegan: boolean | null
+          is_vegetarian: boolean | null
+          item_name: string
+          preparation_time: number | null
+          price: number
+          restaurant_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          allergens?: string[] | null
+          category_id?: string | null
+          created_at?: string | null
+          description: string
+          id?: string
+          image_url: string
+          ingredients?: string[] | null
+          is_available?: boolean | null
+          is_popular?: boolean | null
+          is_vegan?: boolean | null
+          is_vegetarian?: boolean | null
+          item_name: string
+          preparation_time?: number | null
+          price: number
+          restaurant_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          allergens?: string[] | null
+          category_id?: string | null
+          created_at?: string | null
+          description?: string
+          id?: string
+          image_url?: string
+          ingredients?: string[] | null
+          is_available?: boolean | null
+          is_popular?: boolean | null
+          is_vegan?: boolean | null
+          is_vegetarian?: boolean | null
+          item_name?: string
+          preparation_time?: number | null
+          price?: number
+          restaurant_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "food_items_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string | null
+          customer_id: string | null
+          delivery_address: string
+          delivery_time: string | null
+          id: string
+          items: Json
+          order_number: string
+          payment_method: string
+          payment_status: string | null
+          restaurant_id: string | null
+          status: string | null
+          total_amount: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          customer_id?: string | null
+          delivery_address: string
+          delivery_time?: string | null
+          id?: string
+          items?: Json
+          order_number: string
+          payment_method: string
+          payment_status?: string | null
+          restaurant_id?: string | null
+          status?: string | null
+          total_amount: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          customer_id?: string | null
+          delivery_address?: string
+          delivery_time?: string | null
+          id?: string
+          items?: Json
+          order_number?: string
+          payment_method?: string
+          payment_status?: string | null
+          restaurant_id?: string | null
+          status?: string | null
+          total_amount?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          avatar: string | null
+          comment: string
+          created_at: string | null
+          customer_id: string | null
+          customer_name: string
+          food_item_id: string
+          helpful_count: number | null
+          id: string
+          image_url: string | null
+          is_verified_purchase: boolean | null
+          rating: number
+          updated_at: string | null
+        }
+        Insert: {
+          avatar?: string | null
+          comment: string
+          created_at?: string | null
+          customer_id?: string | null
+          customer_name: string
+          food_item_id: string
+          helpful_count?: number | null
+          id?: string
+          image_url?: string | null
+          is_verified_purchase?: boolean | null
+          rating: number
+          updated_at?: string | null
+        }
+        Update: {
+          avatar?: string | null
+          comment?: string
+          created_at?: string | null
+          customer_id?: string | null
+          customer_name?: string
+          food_item_id?: string
+          helpful_count?: number | null
+          id?: string
+          image_url?: string | null
+          is_verified_purchase?: boolean | null
+          rating?: number
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_food_item_id_fkey"
+            columns: ["food_item_id"]
+            isOneToOne: false
+            referencedRelation: "food_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
